@@ -1,0 +1,167 @@
+{"frames": {
+
+"niao_00031.png":
+{
+	"frame": {"x":1,"y":543,"w":266,"h":434},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":0,"w":266,"h":434},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00032.png":
+{
+	"frame": {"x":437,"y":544,"w":266,"h":434},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":0,"w":266,"h":434},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00033.png":
+{
+	"frame": {"x":1,"y":811,"w":266,"h":434},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":0,"w":266,"h":434},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00034.png":
+{
+	"frame": {"x":437,"y":812,"w":266,"h":434},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":34,"y":0,"w":266,"h":434},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00035.png":
+{
+	"frame": {"x":1,"y":274,"w":267,"h":434},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":33,"y":0,"w":267,"h":434},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00036.png":
+{
+	"frame": {"x":437,"y":273,"w":269,"h":434},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":31,"y":0,"w":269,"h":434},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00037.png":
+{
+	"frame": {"x":437,"y":1,"w":270,"h":434},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":0,"w":270,"h":434},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00038.png":
+{
+	"frame": {"x":873,"y":1,"w":270,"h":434},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":0,"w":270,"h":434},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00039.png":
+{
+	"frame": {"x":1,"y":1,"w":271,"h":434},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":0,"w":271,"h":434},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00040.png":
+{
+	"frame": {"x":873,"y":437,"w":270,"h":433},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":1,"w":270,"h":433},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00041.png":
+{
+	"frame": {"x":1,"y":1079,"w":270,"h":433},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":1,"w":270,"h":433},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00042.png":
+{
+	"frame": {"x":873,"y":872,"w":270,"h":433},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":1,"w":270,"h":433},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00043.png":
+{
+	"frame": {"x":436,"y":1080,"w":270,"h":433},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":1,"w":270,"h":433},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00044.png":
+{
+	"frame": {"x":1,"y":1351,"w":270,"h":433},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":1,"w":270,"h":433},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00045.png":
+{
+	"frame": {"x":871,"y":1307,"w":270,"h":433},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":1,"w":270,"h":433},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00046.png":
+{
+	"frame": {"x":436,"y":1352,"w":270,"h":433},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":1,"w":270,"h":433},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00047.png":
+{
+	"frame": {"x":1,"y":1623,"w":270,"h":433},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":1,"w":270,"h":433},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00048.png":
+{
+	"frame": {"x":871,"y":1579,"w":270,"h":433},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":1,"w":270,"h":433},
+	"sourceSize": {"w":300,"h":434}
+},
+"niao_00049.png":
+{
+	"frame": {"x":436,"y":1624,"w":270,"h":433},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":1,"w":270,"h":433},
+	"sourceSize": {"w":300,"h":434}
+}},
+"animations": {
+	"niao": ["niao_00031.png","niao_00032.png","niao_00033.png","niao_00034.png","niao_00035.png","niao_00036.png","niao_00037.png","niao_00038.png","niao_00039.png","niao_00040.png","niao_00041.png","niao_00042.png","niao_00043.png","niao_00044.png","niao_00045.png","niao_00046.png","niao_00047.png","niao_00048.png","niao_00049.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "bailing_2.png",
+	"format": "RGBA8888",
+	"size": {"w":1305,"h":1895},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:35c392afc2cecc5fe5660df0f14662a6:4df025da4ae684f5d6ae6b2b31281ae0:a01caa57e246c33db1a2dcef93da2753$"
+}
+}

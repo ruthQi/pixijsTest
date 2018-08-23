@@ -1,0 +1,139 @@
+{"frames": {
+
+"chengbao1.png":
+{
+	"frame": {"x":1,"y":622,"w":221,"h":298},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":33,"w":221,"h":298},
+	"sourceSize": {"w":243,"h":344}
+},
+"chengbao2.png":
+{
+	"frame": {"x":301,"y":628,"w":221,"h":298},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":33,"w":221,"h":298},
+	"sourceSize": {"w":243,"h":344}
+},
+"chengbao3.png":
+{
+	"frame": {"x":601,"y":628,"w":221,"h":298},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":33,"w":221,"h":298},
+	"sourceSize": {"w":243,"h":344}
+},
+"fengche1.png":
+{
+	"frame": {"x":266,"y":407,"w":213,"h":221},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":213,"h":221},
+	"sourceSize": {"w":213,"h":221}
+},
+"fengche2.png":
+{
+	"frame": {"x":489,"y":413,"w":213,"h":221},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":213,"h":221},
+	"sourceSize": {"w":213,"h":221}
+},
+"fengche3.png":
+{
+	"frame": {"x":712,"y":413,"w":213,"h":221},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":213,"h":221},
+	"sourceSize": {"w":213,"h":221}
+},
+"guiwu1.png":
+{
+	"frame": {"x":1,"y":1,"w":193,"h":243},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":20,"w":193,"h":243},
+	"sourceSize": {"w":218,"h":308}
+},
+"guiwu2.png":
+{
+	"frame": {"x":246,"y":1,"w":193,"h":243},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":20,"w":193,"h":243},
+	"sourceSize": {"w":218,"h":308}
+},
+"guiwu3.png":
+{
+	"frame": {"x":491,"y":1,"w":193,"h":243},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":20,"w":193,"h":243},
+	"sourceSize": {"w":218,"h":308}
+},
+"nangua1.png":
+{
+	"frame": {"x":736,"y":1,"w":219,"h":199},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":88,"w":219,"h":199},
+	"sourceSize": {"w":246,"h":346}
+},
+"nangua2.png":
+{
+	"frame": {"x":1,"y":196,"w":219,"h":199},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":88,"w":219,"h":199},
+	"sourceSize": {"w":246,"h":346}
+},
+"nangua3.png":
+{
+	"frame": {"x":222,"y":196,"w":219,"h":199},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":88,"w":219,"h":199},
+	"sourceSize": {"w":246,"h":346}
+},
+"ufo1.png":
+{
+	"frame": {"x":443,"y":196,"w":209,"h":263},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":30,"w":209,"h":263},
+	"sourceSize": {"w":236,"h":332}
+},
+"ufo2.png":
+{
+	"frame": {"x":708,"y":202,"w":209,"h":263},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":30,"w":209,"h":263},
+	"sourceSize": {"w":236,"h":332}
+},
+"ufo3.png":
+{
+	"frame": {"x":1,"y":397,"w":209,"h":263},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":30,"w":209,"h":263},
+	"sourceSize": {"w":236,"h":332}
+}},
+"animations": {
+	"chengbao": ["chengbao1.png","chengbao2.png","chengbao3.png"],
+	"fengche": ["fengche1.png","fengche2.png","fengche3.png"],
+	"guiwu": ["guiwu1.png","guiwu2.png","guiwu3.png"],
+	"nangua": ["nangua1.png","nangua2.png","nangua3.png"],
+	"ufo": ["ufo1.png","ufo2.png","ufo3.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "house.png",
+	"format": "RGBA8888",
+	"size": {"w":972,"h":850},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d7c895c8be6b7ba553615f97e25aaf9a:930c32cbdaabb58e37c4b80bc1126e7a:012e186cbf003f2e084d2fc78cfd7593$"
+}
+}
