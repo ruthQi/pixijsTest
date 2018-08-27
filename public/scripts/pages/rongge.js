@@ -1,12 +1,12 @@
 import $ from 'jquery';
-import {guide, understand, intro, firstQuestion} from 'pages/rongge/jsondata';
+import {loadResource, addBtnResource, guide, understand, intro, firstQuestion, btnArr, button1, button2, button3, button4, button6, button6_2, yanhua1, yanhua2} from 'pages/rongge/jsondata';
 
 class RonggeTest{
    constructor(){
       this.width = 750;
       this.scale = window.innerWidth / 750;
       this.height = window.innerHeight/ this.scale;
-      this.loader = PIXI.loader;
+      this.loader = loadResource();
       //Ae
       this.mainContainer = new PIXI.Container();
       this.mainContainer.width = this.width;
@@ -18,8 +18,9 @@ class RonggeTest{
 
       this.bgContainer = new PIXI.Container();//rt
       this.operationFlag = false;
+      this.scrollFlag = true;//Ct
       this.positionY = 0;//jt
-      this.curStage = "start_guide";//ct
+      this.curStage = "startGuide";//ct
       this.comparePosition = 0;//kt
  
       this.imgSrc = '/images/rongge/';
@@ -42,42 +43,7 @@ class RonggeTest{
          backgroundColor: "0xffffff"
       });//Ve
       $('#main').append(this.mainView.view);
-      this.loader.add(this.imgSrc + "end/black_bg.png")
-                 .add(this.imgSrc + "text_stable/inner_text.png")
-                 .add(this.imgSrc + "text_stable/outer_text.png")
-                 .add(this.imgSrc + "text_stable/outer_big.png")
-                 .add(this.imgSrc + "text_stable/inner_big.png")
-                 .add(this.imgSrc + "bottom_logo.png")
-                 .add(this.imgSrc + "animate/guide.json")
-                 .add(this.imgSrc + "animate/q1.json")
-                 .add(this.imgSrc + "animate/q2.json")
-                 .add(this.imgSrc + "animate/q3.json")
-                 .add(this.imgSrc + "animate/q4.json")
-                 .add(this.imgSrc + "animate/q6.json")
-                 .add(this.imgSrc + "animate/fire.json")
-                 .add(this.imgSrc + "animate/btn2.json")
-                 .add(this.imgSrc + "q5/dia_1.png")
-                 .add(this.imgSrc + "q5/dia_2.png")
-                 .add(this.imgSrc + "q5/dia_3.png")
-                 .add(this.imgSrc + "q7/dia_1.png")
-                 .add(this.imgSrc + "q7/dia_2.png")
-                 .add(this.imgSrc + "q7/end_1.png")
-                 .add(this.imgSrc + "q7/end_2.png")
-                 .add(this.imgSrc + "q7/end_3.png")
-                 .add(this.imgSrc + "q7/end_4.png")
-                 .add(this.imgSrc + "q7/end_5.png")
-                 .add(this.imgSrc + "q7/name_bg.png")
-                 .add(this.imgSrc + "q7/end_6.png")
-                 .add(this.imgSrc + "end/share_text.png")
-                 .add(this.imgSrc + "end/weibo_share.png")
-                 .add(this.imgSrc + "end/save_text.png")
-                 .add(this.imgSrc + "end/block.png")
-                 .add(this.imgSrc + "end/bottom_left_text.png")
-                 .add(this.imgSrc + "end/final_text.png")
-                 .add(this.imgSrc + "animate/btn_text.json")
-                 .add(this.imgSrc + "end/3_bg.png")
-                 .add(this.imgSrc + "end/3_rect.png")
-                 .on("progress", (t, n)=>{
+      this.loader.on("progress", (t, n)=>{
                      let progress = parseInt(t.progress);
                      $('#loading .splash-percentage').text(`${progress}%`)
                  })
@@ -85,7 +51,6 @@ class RonggeTest{
    }
    loaderMain = () => {
       $("#loading").fadeOut();
-      
       let bg = this.renderRect({
          color: 16119285,
          width: 750,
@@ -150,7 +115,9 @@ class RonggeTest{
    }
    scrollFun = (left, top, bottom) => {
       console.log(left, top, bottom)
-      this.bgContainer.position.y = -2 * top
+      if(!this.scrollFlag){
+         this.bgContainer.position.y = -2 * top
+      }
    }
 
    renderJsonAnimate(jsonData, jsonFile){//c
@@ -241,17 +208,18 @@ class RonggeTest{
       this.renderJsonAnimate(understand, "animate/guide.json");
       this.renderJsonAnimate(intro, "animate/q1.json");
       this.renderJsonAnimate(firstQuestion, "animate/q1.json");
-
       this.btnContainer = new PIXI.Container();//Ze
+      
       this.btnContainer.position.set(0, this.height);
+
       this.addBtnContent(); 
+
       this.showJsonAnimate(this.contentContainer.children[0]);
       setTimeout(() => {
          this.contentContainer.children[0].children[0].children[1].tween.start()
      }, 800),
 
-
-      this.bgContainer.addChild(this.contentContainer);
+      this.bgContainer.addChild(this.contentContainer, this.btnContainer);
       
    }
 
@@ -271,13 +239,14 @@ class RonggeTest{
          num = 0;
       }
       for(let i = num; i < jsonContainer.children.length; i++){
+         let time = jsonContainer.children[i].duration ? jsonContainer.children[i].duration : 1000;
          arr.push(()=>{
             let timer = null;
             let promise = new Promise((resolve, reject)=>{
                this.showTweenAnimate(jsonContainer.children[i]);
                timer = setTimeout(() => {
                   resolve();
-               }, jsonContainer.children[i].duration || 1e3);
+               }, time);
                
             })
             promise.timer = timer;
@@ -286,8 +255,111 @@ class RonggeTest{
       }
       this.forFun(arr).then(()=>{
          this.positionY += 30;
+         if("startGuide" == this.curStage){
+            this.showBtn(this.btnContainer.children[0]);
+         }
          //"startGuide" == ct ? x(Ze.children[0]) : "guide1" == ct ? x(Ze.children[1]) : "q1" == ct ? x(Ze.children[2]) : "guide_end2" == ct ? q() : "q2" == ct ? S() : "q3" == ct ? B() : "q4" == ct ? U() : "q5" == ct ? X() : "q6" == ct ? R() : "q6_state2" == ct ? F() : "input" == ct ? J() : "end" == ct && G()
       })
+   }
+
+   showBtn(obj){//x()
+      console.log(obj)
+      obj.visible = true;
+      let height = 100;
+      let tween1 = new TWEEN.Tween({
+         y: 0
+      }).to({
+         y: -height - 12
+      }, 240).onUpdate(function () {
+         let self = this;
+         obj.children.forEach(function (e, n) {
+            e.position.y = self.y
+         })
+      }).onStart(function () {
+         obj.tween = tween1;
+      }).start(),
+      tween2 = new TWEEN.Tween({
+         y: -112
+      }).to({
+         y: -height
+      }, 260).onUpdate(function () {
+         let self = this;
+         obj.children.forEach(function (e, n) {
+            e.position.y = self.y
+         })
+      }).onStart(function () {
+         obj.tween = tween2;
+     }),
+      tween3 = new TWEEN.Tween({
+         scale: 1
+      }).to({
+         scale: 1.03
+      }, 120).onUpdate(function () {
+         let self = this;
+         obj.children.forEach(function (e, n) {
+             e.scale.set(self.scale)
+         })
+     }).onStart(function () {
+         obj.tween = tween3;
+     }),
+      tween4 = new TWEEN.Tween({
+         scale: 1.03
+      }).to({
+         scale: .98
+      }, 120).onUpdate(function () {
+         let self = this;
+         obj.children.forEach(function (e, n) {
+            e.scale.set(self.scale)
+         })
+     }).onStart(function () {
+         obj.tween = tween4
+     }),
+      tween5 = new TWEEN.Tween({
+         scale: .98
+      }).to({
+         scale: 1.03
+      }, 120).onUpdate(function () {
+         let self = this;
+         obj.children.forEach(function (e, n) {
+            e.scale.set(self.scale)
+         })
+     }).onStart(function () {
+         obj.tween = tween5
+     }),
+      tween6 = new TWEEN.Tween({
+         scale: 1.03
+      }).to({
+         scale: .98
+      }, 120).onUpdate(function () {
+         let self = this;
+         obj.children.forEach(function (e, n) {
+            e.scale.set(self.scale)
+         })
+      }).onStart(function () {
+         obj.tween = tween6;
+      }),
+      tween7 = new TWEEN.Tween({
+         scale: .98
+      }).to({
+         scale: 1
+      }, 120).onUpdate(function () {
+         var self = this;
+         obj.children.forEach(function (e, n) {
+            e.scale.set(self.scale)
+         })
+      }).onComplete( () => {
+         this.scroller.setDimensions(this.width, this.height, this.width, this.comparePosition / 2 + this.height);
+         this.scroller.scrollTo(0, this.comparePosition / 2, 0);
+         this.scrollFlag = false;
+      }).onStart(function () {
+         obj.tween = tween7;
+      });
+      tween1.chain(tween2);
+      tween2.chain(tween3);
+      tween3.chain(tween4);
+      tween4.chain(tween5);
+      tween5.chain(tween6);
+      tween6.chain(tween7);
    }
 
    forFun(arr){//l
@@ -352,17 +424,149 @@ class RonggeTest{
    }  
    showQ3Animate(height, time){
       this.comparePosition += height;
-      // Ze.children.forEach(function (e) {
-      //    e.chosen || e.position.set(0, kt)
-      // });
-     new TWEEN.Tween(this.bgContainer.position).to({
-         y: -this.comparePosition
-     }, time || 300).onUpdate(function () {
+      time = time ? time : 300;
+      console.log(this.comparePosition)
+      this.btnContainer.children.forEach((e) => {
+         if(e.chosen){
+            e.position.set(0, this.comparePosition)
+         }
+      });
+      new TWEEN.Tween(this.bgContainer.position).to({
+            y: -this.comparePosition
+      }, time).onUpdate(function () {
          //st.canMove || (st.position.y = -rt.position.y)
      }).start()
    }
    addBtnContent(){//g()
-      
+      addBtnResource();
+      for(var i = 0; i < btnArr.length; i++){
+         let btnContainer = new PIXI.Container();
+         for(var j = 0; j < btnArr[i].length; j++){
+            let obj = btnArr[i][j];
+            let objContainer = new PIXI.Container();
+            let spriteAni = new PIXI.extras.AnimatedSprite(obj.btnAni);
+            spriteAni.loop = false;
+            spriteAni.animationSpeed = 0.4;
+            let btnSprite;
+            if(obj.text){
+               btnSprite = new PIXI.Sprite(PIXI.loader.resources[this.imgSrc + 'animate/btn_text.json'].textures[obj.text + '.png']);
+               if(obj.btnAni == button1){
+                  btnSprite.position.set((obj.width - btnSprite.width)/2, 17 + (90 - btnSprite.height) / 2);
+               }else if(obj.btnAni == button2){
+                  btnSprite.position.set((obj.width - btnSprite.width)/2, 9 + (88 - btnSprite.height) / 2);
+               }else if(obj.btnAni == button3){
+                  btnSprite.position.set((obj.width - btnSprite.width)/2, 9 + (88 - btnSprite.height) / 2);
+               }else if(obj.btnAni == button4){
+                  if(i == 2){
+                     btnSprite.position.set((obj.width - btnSprite.width)/2, 58 + (80 - btnSprite.height) / 2);
+                  }
+                  if(i == 6){
+                     btnSprite.position.set((obj.width - btnSprite.width)/2, 58 + (80 - btnSprite.height) / 2);
+                  }
+                  if(i == 8){
+                     btnSprite.position.set((obj.width - btnSprite.width)/2, 30 + (88 - btnSprite.height) / 2);
+                  }
+               }
+            }
+            let yanhua1Sprite = new PIXI.extras.AnimatedSprite(yanhua1);
+            yanhua1Sprite.loop = false;
+            yanhua1Sprite.position.set(-60, -60);
+            yanhua1Sprite.animationSpeed = 0.5;
+            yanhua1Sprite.visible = false;
+            objContainer.fire1 = yanhua1Sprite;
+            let yanhua2Sprite = new PIXI.extras.AnimatedSprite(yanhua2);
+            yanhua2Sprite.loop = false;
+            yanhua2Sprite.position.set(obj.width - 80, -60);
+            yanhua2Sprite.animationSpeed = 0.5;
+            yanhua2Sprite.visible = false;
+            objContainer.fire2 = yanhua2Sprite;
+            if(obj.btnAni == button4){
+               yanhua1Sprite.position.set(-30, -30);
+               yanhua2Sprite.position.set(obj.width - 110, -30)
+            }
+            if(obj.text){
+               objContainer.addChild(spriteAni, btnSprite, yanhua1Sprite, yanhua2Sprite);
+            }else{
+               objContainer.addChild(spriteAni, yanhua1Sprite, yanhua2Sprite);
+            }
+            objContainer.pivot.set(obj.width/2, obj.height/2)
+            objContainer.position.set(obj.position.x + obj.width / 2, obj.position.y + obj.height / 2);
+            objContainer.interactive = true;
+            objContainer.buttonMode = true;
+            objContainer.index = j;
+            objContainer.bg = spriteAni;
+            objContainer._width = obj.width;
+            objContainer.state = obj.state;
+            objContainer.on('tap', (e)=>{
+               this.btnClick(e)
+            });
+            btnContainer.addChild(objContainer);
+         }
+         btnContainer.visible = false;
+         this.btnContainer.addChild(btnContainer);
+      }
+   }
+   btnClick(e){
+      console.log(e)
+      let self = e.target;
+      if(!self.parent.chosen){
+         self.parent.chosen = true;
+         this.scrollFlag = true;
+         self.parent.tween.stop();
+         for(let i = 0; i < self.parent.children.length; i++){
+            let child = self.parent.children[i];
+            if(self !== child){
+               new TWEEN.Tween({
+                  scale: 1
+               }).to({
+                  scale: 0
+               }, 200).onUpdate(function(){
+                  child.scale.set(this.scale);
+               }).start();
+            }
+         }
+         let tweenBig = new TWEEN.Tween({
+            scale: 1
+         }).to({
+            scale: 1.2
+         }, 200).onUpdate(function () {
+            self.scale.set(this.scale)
+         }).onComplete(function () {
+            self.bg.play();
+         }).start();
+
+         let tweenSmall = new TWEEN.Tween({
+            scale: 1.2
+         }).to({
+            scale: .9
+         }, 300).onUpdate(function () {
+            self.scale.set(this.scale)
+         }).onComplete(function () {
+            self.fire1.visible = true;
+            self.fire1.play();
+            self.fire2.visible = true;
+            self.fire2.play();
+         });
+
+         let positionX = 750 - self._width + self.pivot.x;
+         console.log(self.position)
+         let positionTween = new TWEEN.Tween(self.position).to({
+            _x: positionX,
+            _y: 100 + this.positionY - self.parent.position.y - this.height
+         }, 300).onComplete(() => {
+            this.positionY += self.height - 70 + 30;
+            if("guide1" == self.state){
+               this.curStage = 'guide1';
+            }else if("q1" == self.state){
+               this.curStage = 'q1';
+            }else if("guide_end" == self.state){
+
+            }else if("guide_end2" == self.state){
+
+            }
+         });
+         tweenBig.chain(tweenSmall, positionTween);
+      }   
    }
 }
 
