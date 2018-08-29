@@ -121,11 +121,9 @@ class RonggeTest{
      })
    }
    scrollFun = (left, top, bottom) => {
-      console.log('##########################', this.scrollFlag)
-      console.log(left, top, bottom)
-      this.bgContainer.position.y = -2 * top
+
       if(!this.scrollFlag){
-         
+         this.bgContainer.position.y = -2 * top
       }
    }
 
@@ -405,9 +403,8 @@ class RonggeTest{
          })
       }).onComplete( () => {
          this.scroller.setDimensions(this.width, this.height, this.width, this.comparePosition / 2 + this.height);
+         //this.scroller.scrollTo(0, this.comparePosition / 2, 0);
          this.scrollFlag = false;
-         this.scroller.scrollTo(0, this.comparePosition / 2, 0);
-         
       }).onStart(function () {
          obj.tween = tween7;
       });
@@ -458,7 +455,6 @@ class RonggeTest{
       this.positionY += height;
       if("q4_state2" != this.curStage && "q6_state2" != this.curStage){
          if(!num){
-            console.log('@@@@@@@@@@@@@@@@@', subContainer.parent)
             if(this.comparePosition <= subContainer.parent.position._y - height){
                if("guide2" == this.curStage){
                   height += 90;
@@ -493,7 +489,6 @@ class RonggeTest{
    }  
    showQ3Animate(height, time){//f()
       this.comparePosition += height;
-      console.log('^^^^^^^^^^^^^^^^^^^', this.comparePosition)
       time = time ? time : 300;
       this.btnContainer.children.forEach((e) => {
          //console.log(e.chosen)
@@ -501,13 +496,11 @@ class RonggeTest{
             e.position.set(0, this.comparePosition)
          }
       });
-      
-      new TWEEN.Tween(this.bgContainer.position).to({
-           _y: -this.comparePosition
-      }, time).onUpdate(() => {
-         console.log('9999999999999999999999999', this.comparePosition)
-         console.log(this.scroller)
-         this.scroller.scrollTo(0, this.comparePosition / 2, false);
+      let position = this.bgContainer.position;
+      new TWEEN.Tween(position).to({
+         _y: -this.comparePosition
+      }, 1000).onUpdate(() => {
+         this.bgContainer.position.set(0, -this.comparePosition);
          //console.log('++++++++++++++++++++++++', this.bgContainer.position)
          //st.canMove || (st.position.y = -rt.position.y)
      }).start()
