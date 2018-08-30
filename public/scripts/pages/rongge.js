@@ -1,4 +1,5 @@
 import $ from 'jquery';
+//const TWEEN = require('@tweenjs/tween.js');
 import {loadResource, addBtnResource, guide, understand, intro, firstQuestion, btnArr, button1, button2, button3, button4, button6, button6_2, yanhua1, yanhua2} from 'pages/rongge/jsondata';
 
 class RonggeTest{
@@ -108,9 +109,9 @@ class RonggeTest{
    }
    updateLoop(){
       TWEEN.update();
-      requestAnimationFrame(()=>{this.updateLoop()});
       this.mainView.render(this.mainContainer);
       this.endView.render(this.endContainer);
+      requestAnimationFrame(()=>{this.updateLoop()});
    }
    initScroller(){
       this.scroller = new Scroller(this.scrollFun, {
@@ -210,6 +211,7 @@ class RonggeTest{
       this.contentContainer.addChild(jsonContainer);
    }
    addContent(){//o
+      console.log('9999999999999999')
       this.contentContainer = new PIXI.Container();//Ke;
       this.renderJsonAnimate(guide, "animate/guide.json");
       this.renderJsonAnimate(understand, "animate/guide.json");
@@ -443,6 +445,7 @@ class RonggeTest{
       }, 280).onUpdate(function(){
          subContainer.scale.set(this.scale);
       }).start();
+      console.log(bigTween)
       let smallTween = new TWEEN.Tween({
          scale: 1.05
       }).to({
@@ -455,7 +458,7 @@ class RonggeTest{
       this.positionY += height;
       if("q4_state2" != this.curStage && "q6_state2" != this.curStage){
          if(!num){
-            if(this.comparePosition <= subContainer.parent.position._y - height){
+            if(this.comparePosition <= subContainer.parent.position.y - height){
                if("guide2" == this.curStage){
                   height += 90;
                }
@@ -481,8 +484,8 @@ class RonggeTest{
                   height += 50;
                }
                this.showQ3Animate(height);
-            }else if(this.comparePosition < subContainer.parent.position._y){
-               this.showQ3Animate(subContainer.parent.position._y - this.comparePosition)
+            }else if(this.comparePosition < subContainer.parent.position.y){
+               this.showQ3Animate(subContainer.parent.position.y - this.comparePosition)
             }
          }
       }
@@ -496,14 +499,12 @@ class RonggeTest{
             e.position.set(0, this.comparePosition)
          }
       });
-      let position = this.bgContainer.position;
-      new TWEEN.Tween(position).to({
-         _y: -this.comparePosition
-      }, 1000).onUpdate(() => {
-         this.bgContainer.position.set(0, -this.comparePosition);
-         //console.log('++++++++++++++++++++++++', this.bgContainer.position)
+      new TWEEN.Tween(this.bgContainer.position).to({
+         y: -this.comparePosition
+      }, time).onUpdate(() => {
+         console.log(this.bgContainer.position)
          //st.canMove || (st.position.y = -rt.position.y)
-     }).start()
+     }).start();
    }
    addBtnContent(){//g()
       addBtnResource();
@@ -623,8 +624,8 @@ class RonggeTest{
 
          let positionX = 750 - target._width + target.pivot.x;
          let positionTween = new TWEEN.Tween(target.position).to({
-            _x: positionX,
-            _y: 100 + this.positionY - target.parent.position.y - this.height
+            x: positionX,
+            y: 100 + this.positionY - target.parent.position.y - this.height
          }, 300).onComplete(() => {
             this.positionY += target.height - 70 + 30;
             if("guide1" == target.state){
