@@ -6,6 +6,9 @@ module.exports = function(app) {
 
     app.get('/rongge', function(req, res, next){
         res.render('pages/rongge');
+    });
+    app.get('/tween', function(req, res, next){
+        res.render('pages/tween');
     })
 
 };
