@@ -1,5 +1,13 @@
+/**
+ * 主函数：loaderMain
+ * 加载动画：addContent
+ * 添加json动画：renderJsonAnimate
+ * 添加按钮：addBtnContent
+ * 展示json动画：showJsonAnimate ----》 showTweenAnimate ----》 showQ3Animate(移动bgContainer位置)
+ */
 import $ from 'jquery';
 //const TWEEN = require('@tweenjs/tween.js');
+import TWEEN from '@tweenjs/tween.js'
 import {loadResource, addBtnResource, guide, understand, intro, firstQuestion, btnArr, button1, button2, button3, button4, button6, button6_2, yanhua1, yanhua2} from 'pages/rongge/jsondata';
 
 class RonggeTest{
@@ -74,7 +82,6 @@ class RonggeTest{
       
       this.bindEvent();
       this.updateLoop();
-      
 
    }
    bindEvent(){
@@ -107,8 +114,8 @@ class RonggeTest{
       rect.endFill();
       return rect;
    }
-   updateLoop(){
-      TWEEN.update();
+   updateLoop(time){
+      TWEEN.update(time);
       this.mainView.render(this.mainContainer);
       this.endView.render(this.endContainer);
       requestAnimationFrame(()=>{this.updateLoop()});
@@ -162,29 +169,29 @@ class RonggeTest{
                         rotation: 0
                      }).to({
                         rotation: -15 / 180 * Math.PI
-                     }, 140).onUpdate(function () {
-                        contentSprite.rotation = this.rotation
+                     }, 140).onUpdate(function (object) {
+                        contentSprite.rotation = object.rotation
                      });
                      itemTween1 = new TWEEN.Tween({
                         rotation: -15 / 180 * Math.PI
                      }).to({
                         rotation: 0
-                     }, 140).onUpdate(function () {
-                        contentSprite.rotation = this.rotation
+                     }, 140).onUpdate(function (object) {
+                        contentSprite.rotation = object.rotation
                      });
                      itemTween2 = new TWEEN.Tween({
                         rotation: 0
                      }).to({
                         rotation: -15 / 180 * Math.PI
-                     }, 140).onUpdate(function () {
-                        contentSprite.rotation = this.rotation
+                     }, 140).onUpdate(function (object) {
+                        contentSprite.rotation = object.rotation
                      });
                      itemTween3 = new TWEEN.Tween({
                         rotation: -15 / 180 * Math.PI
                      }).to({
                         rotation: 0
-                     }, 140).onUpdate(function () {
-                        contentSprite.rotation = this.rotation
+                     }, 140).onUpdate(function (object) {
+                        contentSprite.rotation = object.rotation
                      })
                      contentSprite.tween = itemTween;
                      itemTween.chain(itemTween1);
@@ -211,7 +218,6 @@ class RonggeTest{
       this.contentContainer.addChild(jsonContainer);
    }
    addContent(){//o
-      console.log('9999999999999999')
       this.contentContainer = new PIXI.Container();//Ke;
       this.renderJsonAnimate(guide, "animate/guide.json");
       this.renderJsonAnimate(understand, "animate/guide.json");
@@ -226,14 +232,13 @@ class RonggeTest{
       this.showJsonAnimate(this.contentContainer.children[0]);
       setTimeout(() => {
          this.contentContainer.children[0].children[0].children[1].tween.start()
-     }, 800),
+     }, 800);
 
       this.bgContainer.addChild(this.contentContainer, this.btnContainer);
       
    }
-
+   //把场景添加进数组，并逐条执行
    showJsonAnimate(jsonContainer, num){//h
-      //console.log(jsonContainer)
       jsonContainer.position.set(0, this.positionY);
       let arr = [];
       if(num){
@@ -266,6 +271,7 @@ class RonggeTest{
             return promise;
          })
       }
+      //每种场景展示不同的按钮
       this.forFun(arr).then(()=>{
          this.positionY += 30;
          if("startGuide" == this.curStage){
@@ -319,17 +325,15 @@ class RonggeTest{
    }
 
    showBtn(obj){//x()
-      //console.log(obj)
       obj.visible = true;
       let height = 100;
       let tween1 = new TWEEN.Tween({
          y: 0
       }).to({
          y: -height - 12
-      }, 240).onUpdate(function () {
-         let self = this;
+      }, 240).onUpdate(function (object) {
          obj.children.forEach(function (e, n) {
-            e.position.y = self.y
+            e.position.y = object.y
          })
       }).onStart(function () {
          obj.tween = tween1;
@@ -338,10 +342,9 @@ class RonggeTest{
          y: -112
       }).to({
          y: -height
-      }, 260).onUpdate(function () {
-         let self = this;
+      }, 260).onUpdate(function (object) {
          obj.children.forEach(function (e, n) {
-            e.position.y = self.y
+            e.position.y = object.y
          })
       }).onStart(function () {
          obj.tween = tween2;
@@ -350,10 +353,9 @@ class RonggeTest{
          scale: 1
       }).to({
          scale: 1.03
-      }, 120).onUpdate(function () {
-         let self = this;
+      }, 120).onUpdate(function (object) {
          obj.children.forEach(function (e, n) {
-             e.scale.set(self.scale)
+             e.scale.set(object.scale)
          })
      }).onStart(function () {
          obj.tween = tween3;
@@ -362,10 +364,9 @@ class RonggeTest{
          scale: 1.03
       }).to({
          scale: .98
-      }, 120).onUpdate(function () {
-         let self = this;
+      }, 120).onUpdate(function (object) {
          obj.children.forEach(function (e, n) {
-            e.scale.set(self.scale)
+            e.scale.set(object.scale)
          })
      }).onStart(function () {
          obj.tween = tween4
@@ -374,10 +375,9 @@ class RonggeTest{
          scale: .98
       }).to({
          scale: 1.03
-      }, 120).onUpdate(function () {
-         let self = this;
+      }, 120).onUpdate(function (object) {
          obj.children.forEach(function (e, n) {
-            e.scale.set(self.scale)
+            e.scale.set(object.scale)
          })
      }).onStart(function () {
          obj.tween = tween5
@@ -386,10 +386,9 @@ class RonggeTest{
          scale: 1.03
       }).to({
          scale: .98
-      }, 120).onUpdate(function () {
-         let self = this;
+      }, 120).onUpdate(function (object) {
          obj.children.forEach(function (e, n) {
-            e.scale.set(self.scale)
+            e.scale.set(object.scale)
          })
       }).onStart(function () {
          obj.tween = tween6;
@@ -398,14 +397,13 @@ class RonggeTest{
          scale: .98
       }).to({
          scale: 1
-      }, 120).onUpdate(function () {
-         var self = this;
+      }, 120).onUpdate(function (object) {
          obj.children.forEach(function (e, n) {
-            e.scale.set(self.scale)
+            e.scale.set(object.scale)
          })
       }).onComplete( () => {
          this.scroller.setDimensions(this.width, this.height, this.width, this.comparePosition / 2 + this.height);
-         //this.scroller.scrollTo(0, this.comparePosition / 2, 0);
+         this.scroller.scrollTo(0, this.comparePosition / 2, 0);
          this.scrollFlag = false;
       }).onStart(function () {
          obj.tween = tween7;
@@ -438,20 +436,19 @@ class RonggeTest{
    }
 
    showTweenAnimate(subContainer, num){//u
-      let bigTween = new TWEEN.Tween({
+      var bigTween = new TWEEN.Tween({
          scale: 0
       }).to({
          scale: 1.05
-      }, 280).onUpdate(function(){
-         subContainer.scale.set(this.scale);
+      }, 280).onUpdate(function(object){
+         subContainer.scale.set(object.scale);
       }).start();
-      console.log(bigTween)
-      let smallTween = new TWEEN.Tween({
+      var smallTween = new TWEEN.Tween({
          scale: 1.05
       }).to({
          scale: 1
-      }, 220).onUpdate(function(){
-         subContainer.scale.set(this.scale);
+      }, 220).onUpdate(function(object){
+         subContainer.scale.set(object.scale);
       });
       bigTween.chain(smallTween);
       let height = subContainer._height;
@@ -494,15 +491,14 @@ class RonggeTest{
       this.comparePosition += height;
       time = time ? time : 300;
       this.btnContainer.children.forEach((e) => {
-         //console.log(e.chosen)
          if(!e.chosen){
             e.position.set(0, this.comparePosition)
          }
       });
       new TWEEN.Tween(this.bgContainer.position).to({
          y: -this.comparePosition
-      }, time).onUpdate(() => {
-         console.log(this.bgContainer.position)
+      }, time).onUpdate((object) => {
+         //console.log(this.bgContainer.position)
          //st.canMove || (st.position.y = -rt.position.y)
      }).start();
    }
@@ -588,8 +584,8 @@ class RonggeTest{
                   scale: 1
                }).to({
                   scale: 0
-               }, 200).onUpdate(function(){
-                  child.scale.set(this.scale);
+               }, 200).onUpdate(function(object){
+                  child.scale.set(object.scale);
                }).start();
             }
          }
@@ -597,8 +593,8 @@ class RonggeTest{
             scale: 1
          }).to({
             scale: 1.2
-         }, 200).onUpdate(function () {
-            target.scale.set(this.scale)
+         }, 200).onUpdate(function (object) {
+            target.scale.set(object.scale)
          }).onComplete(function () {
             target.bg.play();
          }).start();
@@ -613,8 +609,8 @@ class RonggeTest{
             scale: 1.2
          }).to({
             scale: .9
-         }, 300).onUpdate(function () {
-            target.scale.set(this.scale)
+         }, 300).onUpdate(function (object) {
+            target.scale.set(object.scale)
          }).onComplete(function () {
             target.fire1.visible = true;
             target.fire1.play();
@@ -630,7 +626,6 @@ class RonggeTest{
             this.positionY += target.height - 70 + 30;
             if("guide1" == target.state){
                this.curStage = 'guide1';
-               console.log(this.contentContainer.children[1])
                this.promiseFun(()=>{
                   this.showJsonAnimate(this.contentContainer.children[1]);
                }, 500)

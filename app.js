@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var server = require('http').Server(app);
 
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 8081);
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
 app.set('views', __dirname + '/views');
